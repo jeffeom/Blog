@@ -7,8 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+  <div class="right">
+  <%= link_to "Home", root_path %> |
+  <%= link_to "About", about_path %> |
+  <%= link_to "New Post", new_post_path %> |
+  <%= link_to "Posts", posts_path %>
+  </div>
+  <hr>
+  <% if(:notice || :alert) %>
+    <div>
+      <%= flash[:notice] || flash[:alert] %>
+      <hr>
+    </div>
+  <% end %>
+  <%= yield %>
 
 </body>
 </html>
