@@ -1,4 +1,6 @@
 <% @posts.each do |post| %>
-  <%= link_to post.title + " : " + post.body.first(50), post_path(post) %>
+  <div class="well">
+  <%= link_to post.title + ": " + post.body.first(50) + " ...", post_path(post) %>
   <br>
+  </div>
 <% end %>

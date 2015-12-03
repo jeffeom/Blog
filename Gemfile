@@ -1,7 +1,38 @@
 source 'https://rubygems.org'
 
+# No need to run: gem install rails -v 4.2.4 (or similar for other gems)
+# if the gem is not installed for your Ruby version, Bundler will install it
+# for you.
+
+# Bundler will require all the gems by default for your environment unless
+# you specify option: require: false.
+
+# gem 'uglifier', '>= 1.3.0'
+# 1. Bundler will look in your installed gem for a gem that qualifies the
+#    criteria given (uglifier gem with version greater than 1.3.0)
+# 2. If the gem is not found, Bundler will install the latest that qualifies
+#    from the source above (in this case https://rubygems.orb)
+# 3. Bundler will update Gemfile.lock with that version.
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'sass', '~> 3.4', '>= 3.4.19'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+
+gem 'simple_form'
+
+gem 'friendly_id', '~> 5.1.0'
+
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+
+gem 'font-awesome-rails'
+
+gem 'cancancan', '~> 1.10'
+
+gem "bootstrap-sass"
+
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -12,7 +43,12 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
+
+gem "faker" # if no version is specified it's going to use the latest from your
+            # Ruby installation. If you don't have the gem installed, then it
+            # will install the latest.
+gem "cowsay"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -24,7 +60,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -32,16 +68,27 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#gem "awesome_print", group: :development
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  gem 'rails-erd'
+  gem "letter_opener"
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
+  gem "quiet_assets"
+
+  # we use three gems to look nicer
+  gem "awesome_print"
+  gem "interactive_editor"
+  gem "hirb"
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

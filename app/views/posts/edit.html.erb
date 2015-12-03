@@ -3,11 +3,12 @@
 <%= form_for @post do |f| %>
   <div>
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
   <div>
     <%= f.label :body %>
-    <%= f.text_area :body%>
+    <%= f.text_area :body, class: "form-control"%>
   </div>
-    <%= f.submit %>
+  <br>
+    <%= f.submit class: "btn btn-primary"%>
   <% end %>
