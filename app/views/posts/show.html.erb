@@ -25,7 +25,7 @@
 <%= @comment.errors.full_messages.join(", ") %>
 
 <h2> Comments </h2>
-<% @post.comments.each do |comment| %>
+<% @post.comments.order('created_at DESC').each do |comment| %>
   <div class="well">
     <%= comment.body %>
     <%= link_to "Delete", post_comment_path(@post, comment), method: :delete,
