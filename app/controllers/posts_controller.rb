@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authorize, only: [:edit, :update, :destroy]
+
   def new
     if user_signed_in?
       @post = Post.new
@@ -10,6 +12,7 @@ class PostsController < ApplicationController
   def create
     post_params = params.require(:post).permit([:title, :body])
     @post = Post.new post_params
+    @post.user = current_user
     if @post.save
       redirect_to post_path(@post)
     else
@@ -32,6 +35,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find params[:id]
+    if current_user != @post.user
+      redirect_to root_path, alert: "You did not build this Post"
+    end
   end
 
   def update
@@ -49,5 +55,9 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "Post deleted Successfully."
     redirect_to posts_path
+  end
+
+  def authorize
+    redirect_to root_path, notice: "Access Denied!" unless can? :manage, @q
   end
 end
