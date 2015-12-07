@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get '/about' => 'home#about', as: :about
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
   resources :posts do
     resources :comments
+    resources :favourites, only: [:create, :destroy]
   end
 
   root 'home#index'

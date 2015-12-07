@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authorize, only: [:edit, :update, :destroy]
 
   def new
     if user_signed_in?
@@ -55,9 +54,5 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "Post deleted Successfully."
     redirect_to posts_path
-  end
-
-  def authorize
-    redirect_to root_path, notice: "Access Denied!" unless can? :manage, @q
   end
 end

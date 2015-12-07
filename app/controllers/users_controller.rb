@@ -20,4 +20,13 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def show
+    if user_signed_in?
+      @user = User.find params[:id]
+      @favourites = @user.favourites
+    else
+      redirect_to new_user_session_path, alert:"Log in Please!"
+    end
+  end
 end

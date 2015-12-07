@@ -1,0 +1,10 @@
+<% @favourites.each do |fav| %>
+<div class="well">
+  <% fav.posts.each do |post| %>
+    <%= post.title %>
+  <% end %>
+
+  <%#= link_to post.title + ": " + post.body.first(50) + " ...", post_path(post) %>
+  <br>
+</div>
+<% end %>
