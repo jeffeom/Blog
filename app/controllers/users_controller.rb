@@ -23,8 +23,13 @@ class UsersController < ApplicationController
 
   def show
     if user_signed_in?
-      @user = User.find params[:id]
-      @favourites = @user.favourites
+        @user = User.find params[:id]
+      if user_signed_in? && @user == current_user
+        @user = User.find params[:id]
+        @favourites = @user.favourites
+      else
+        redirect_to root_path, alert: "You are not allowed!"
+      end
     else
       redirect_to new_user_session_path, alert:"Log in Please!"
     end
