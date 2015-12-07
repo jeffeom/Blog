@@ -1,5 +1,5 @@
 <h1><%= @user.first_name.capitalize %>'s Favoured Posts:</h1>
-<%= @favourites.each do |fav| %>
+<% @favourites.each do |fav| %>
 <div class="well">
   <h2><li><%=link_to fav.post.title, post_path(fav.post) %></li></h2>
   <br>
