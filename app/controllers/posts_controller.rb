@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
   def new
-    @post = Post.new
+    if user_signed_in?
+      @post = Post.new
+    else
+      redirect_to new_user_session_path, alert:"Log in Please!"
+    end
   end
 
   def create
@@ -14,8 +18,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find params[:id]
-    @comment = Comment.new
+    if user_signed_in?
+      @post = Post.find params[:id]
+      @comment = Comment.new
+    else
+      redirect_to new_user_session_path, alert:"Log in Please!"
+    end
   end
 
   def index
