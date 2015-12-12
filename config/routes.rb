@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
+  devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords'}
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get '/about' => 'home#about', as: :about
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
   resources :posts do
     resources :comments
+    resources :favourites, only: [:create, :destroy]
   end
 
   root 'home#index'

@@ -1,11 +1,17 @@
 class PostsController < ApplicationController
+
   def new
-    @post = Post.new
+    if user_signed_in?
+      @post = Post.new
+    else
+      redirect_to new_user_session_path, alert:"Log in Please!"
+    end
   end
 
   def create
     post_params = params.require(:post).permit([:title, :body])
     @post = Post.new post_params
+    @post.user = current_user
     if @post.save
       redirect_to post_path(@post)
     else
@@ -14,8 +20,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find params[:id]
-    @comment = Comment.new
+    if user_signed_in?
+      @post = Post.find params[:id]
+      @comment = Comment.new
+    else
+      redirect_to new_user_session_path, alert:"Log in Please!"
+    end
   end
 
   def index
@@ -24,6 +34,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find params[:id]
+    if current_user != @post.user
+      redirect_to root_path, alert: "You did not build this Post"
+    end
   end
 
   def update
